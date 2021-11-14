@@ -12,6 +12,15 @@ const green = document.getElementById("greenSq");
 const play = document.getElementById("play");
 const roundsText = document.getElementById("rounds");
 
+//class to represent a game of Simone (might try a diff approach later)
+class Simone {
+  won = false;
+  lost = false;
+  constructor(rounds) {
+    //does something
+  }
+}
+
 //generate start sequence offline for now
 function getStartSequence() {
   let startObj = { type: "start", sequence: [] };
