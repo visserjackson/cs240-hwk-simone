@@ -24,30 +24,55 @@ class Simone {
   constructor(rounds) {
     this.rounds = rounds;
   }
-  displayStartSequence(seq) {
+  async displayStartSequence(seq) {
     for (let i = 0; i < seq.length; i++) {
       switch (seq[i]) {
         case "R":
-          //light up button
-          //play audio
+          red.classList.add("lightred");
           new Audio("sounds/red.wav").play();
+          await new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, 120)
+          );
+          red.classList.remove("lightred");
           break;
         case "B":
-          //light up button
-          //play audio
+          blue.classList.add("lightblue");
           new Audio("sounds/blue.wav").play();
+          await new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, 120)
+          );
+          blue.classList.remove("lightblue");
           break;
         case "Y":
-          //light up button
-          //play audio
+          yellow.classList.add("lightyellow");
           new Audio("sounds/yellow.wav").play();
+          await new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, 120)
+          );
+          yellow.classList.remove("lightyellow");
           break;
         case "G":
-          //light up button
-          //play audio
+          green.classList.add("lightgreen");
           new Audio("sounds/green.wav").play();
+          await new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, 120)
+          );
+          green.classList.remove("lightgreen");
           break;
       }
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve();
+        }, 120)
+      );
     }
   }
 
@@ -109,5 +134,5 @@ function getSolution(rounds) {
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", function () {
   game = new Simone(roundsText.value);
-  game.displayStartSequence();
+  game.displayStartSequence(getStartSequence().sequence);
 });
