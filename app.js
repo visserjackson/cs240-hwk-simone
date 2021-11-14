@@ -12,12 +12,23 @@ const green = document.getElementById("greenSq");
 const play = document.getElementById("play");
 const roundsText = document.getElementById("rounds");
 
+//field to represent Simone game
+let game;
+
 //class to represent a game of Simone (might try a diff approach later)
 class Simone {
   won = false;
   lost = false;
+  rounds;
   constructor(rounds) {
-    //does something
+    this.rounds = rounds;
+  }
+  //getters
+  hasWon() {
+    return this.won;
+  }
+  hasLost() {
+    return this.lost;
   }
 }
 
@@ -66,3 +77,9 @@ function getSolution(rounds) {
   }
   return solutionObj;
 }
+
+//clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
+play.addEventListener("click", function () {
+  game = new Simone(roundsText.value);
+  console.dir(game);
+});
