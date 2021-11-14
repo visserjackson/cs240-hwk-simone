@@ -20,11 +20,14 @@ let game;
 class Simone {
   won = false;
   lost = false;
-  rounds;
-  constructor(rounds) {
-    this.rounds = rounds;
+  currRound = 1;
+  roundsTotal;
+  solution;
+  constructor(rounds, solution) {
+    this.roundsTotal = rounds;
+    this.solution = solution;
   }
-  async displayStartSequence(seq) {
+  async displayStart(seq) {
     for (let i = 0; i < seq.length; i++) {
       switch (seq[i]) {
         case "R":
@@ -76,6 +79,55 @@ class Simone {
     }
   }
 
+  async playRound() {
+    async function displaySoulutionSequence(seq) {
+      for (let i = 0; i < currRound; i++) {
+        switch (seq[i]) {
+          case "R":
+            red.classList.add("lightred");
+            new Audio("sounds/red.wav").play();
+            await new Promise((resolve) =>
+              setTimeout(() => {
+                resolve();
+              }, 120)
+            );
+            red.classList.remove("lightred");
+            break;
+          case "B":
+            blue.classList.add("lightblue");
+            new Audio("sounds/blue.wav").play();
+            await new Promise((resolve) =>
+              setTimeout(() => {
+                resolve();
+              }, 120)
+            );
+            blue.classList.remove("lightblue");
+            break;
+          case "Y":
+            yellow.classList.add("lightyellow");
+            new Audio("sounds/yellow.wav").play();
+            await new Promise((resolve) =>
+              setTimeout(() => {
+                resolve();
+              }, 120)
+            );
+            yellow.classList.remove("lightyellow");
+            break;
+          case "G":
+            green.classList.add("lightgreen");
+            new Audio("sounds/green.wav").play();
+            await new Promise((resolve) =>
+              setTimeout(() => {
+                resolve();
+              }, 120)
+            );
+            green.classList.remove("lightgreen");
+            break;
+        }
+      }
+    }
+  }
+
   //getters
   hasWon() {
     return this.won;
@@ -86,7 +138,7 @@ class Simone {
 }
 
 //generate start sequence offline for now
-function getStartSequence() {
+function getStart() {
   let startObj = { type: "start", sequence: [] };
   for (let i = 0; i < START_LEGNTH; i++) {
     let num = Math.floor(Math.random() * 4 + 1);
@@ -128,11 +180,11 @@ function getSolution(rounds) {
         break;
     }
   }
-  return solutionObj;
+  return solutionObj.key;
 }
 
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", function () {
-  game = new Simone(roundsText.value);
-  game.displayStartSequence(getStartSequence().sequence);
+  game = new Simone(roundsText.value, getSolution(roundsText.value)); //game should default to 10 if no number is entered
+  game.displayStart(getStart().sequence);
 });
