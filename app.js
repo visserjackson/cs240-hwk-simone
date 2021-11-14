@@ -11,6 +11,7 @@ const yellow = document.getElementById("yellowSq");
 const green = document.getElementById("greenSq");
 const play = document.getElementById("play");
 const roundsText = document.getElementById("rounds");
+const status = document.getElementById("status");
 
 //field to represent Simone game
 let game;
@@ -23,6 +24,33 @@ class Simone {
   constructor(rounds) {
     this.rounds = rounds;
   }
+  displayStartSequence(seq) {
+    for (let i = 0; i < seq.length; i++) {
+      switch (seq[i]) {
+        case "R":
+          //light up button
+          //play audio
+          new Audio("sounds/red.wav").play();
+          break;
+        case "B":
+          //light up button
+          //play audio
+          new Audio("sounds/blue.wav").play();
+          break;
+        case "Y":
+          //light up button
+          //play audio
+          new Audio("sounds/yellow.wav").play();
+          break;
+        case "G":
+          //light up button
+          //play audio
+          new Audio("sounds/green.wav").play();
+          break;
+      }
+    }
+  }
+
   //getters
   hasWon() {
     return this.won;
@@ -81,5 +109,5 @@ function getSolution(rounds) {
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", function () {
   game = new Simone(roundsText.value);
-  console.dir(game);
+  game.displayStartSequence();
 });
