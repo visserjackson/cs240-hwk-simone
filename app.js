@@ -90,7 +90,7 @@ class Simone {
           await new Promise((resolve) =>
             setTimeout(() => {
               resolve();
-            }, 120)
+            }, 400)
           );
           red.classList.remove("lightred");
           break;
@@ -100,7 +100,7 @@ class Simone {
           await new Promise((resolve) =>
             setTimeout(() => {
               resolve();
-            }, 120)
+            }, 400)
           );
           blue.classList.remove("lightblue");
           break;
@@ -110,7 +110,7 @@ class Simone {
           await new Promise((resolve) =>
             setTimeout(() => {
               resolve();
-            }, 120)
+            }, 400)
           );
           yellow.classList.remove("lightyellow");
           break;
@@ -120,7 +120,7 @@ class Simone {
           await new Promise((resolve) =>
             setTimeout(() => {
               resolve();
-            }, 120)
+            }, 400)
           );
           green.classList.remove("lightgreen");
           break;
