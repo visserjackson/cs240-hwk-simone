@@ -212,6 +212,10 @@ class Simone {
     return this.solution;
   }
 
+  getTotalRounds() {
+    return this.roundsTotal;
+  }
+
   //setters
   addInput(input) {
     this.inputs.push(input);
@@ -277,6 +281,7 @@ play.addEventListener("click", async function () {
       resolve();
     }, 4000)
   );
+  game.displayStatus(`Round 1 of ${game.getTotalRounds()}`);
   game.displaySoulution(game.getSolution());
 });
 
