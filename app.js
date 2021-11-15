@@ -173,6 +173,7 @@ class Simone {
       else if (this.inputs.length == this.currRound) {
         //update status
         this.displayStatus("Good job! Prepare for next round.");
+        new Audio("sounds/nextRound.wav").play();
         //update round
         this.currRound++;
         //clear inputs
