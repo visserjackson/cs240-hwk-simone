@@ -24,7 +24,7 @@ class Simone {
   roundsTotal;
   solution;
   inputs = [];
-  constructor(rounds, solution) {
+  constructor(rounds = 10, solution) {
     this.roundsTotal = rounds;
     this.solution = solution;
   }
@@ -80,27 +80,7 @@ class Simone {
     }
   }
 
-  async playRound() {
-    //display soulution sequence first
-    this.displaySoulutionSequence(this.solution);
-    //set up event listeners?
-    red.addEventListener("mousedown", function () {
-      this.inputs.push("R");
-    });
-    blue.addEventListener("mousedown", function () {
-      this.inputs.push("B");
-    });
-    yellow.addEventListener("mousedown", function () {
-      this.inputs.push("Y");
-    });
-    green.addEventListener("mousedown", function () {
-      this.inputs.push("G");
-    });
-  }
-
-  async compareInputs() {}
-
-  async displaySoulutionSequence(seq) {
+  async displaySoulution(seq) {
     for (let i = 0; i < this.currRound; i++) {
       switch (seq[i]) {
         case "R":
@@ -159,6 +139,10 @@ class Simone {
   hasLost() {
     return this.lost;
   }
+
+  getSolution() {
+    return this.solution;
+  }
 }
 
 //generate start sequence offline for now
@@ -209,12 +193,16 @@ function getSolution(rounds) {
 
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", async function () {
-  game = new Simone(roundsText.value, getSolution(roundsText.value)); //game should default to 10 if no number is entered
+  if (roundsText.value == "") {
+    game = new Simone(10, getSolution(10));
+  } else {
+    game = new Simone(roundsText.value, getSolution(roundsText.value));
+  }
   game.displayStart(getStart().sequence);
   await new Promise((resolve) =>
     setTimeout(() => {
       resolve();
     }, 4000)
   );
-  game.playRound();
+  game.displaySoulution(game.getSolution());
 });
