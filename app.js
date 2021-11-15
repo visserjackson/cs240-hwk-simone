@@ -80,51 +80,58 @@ class Simone {
   }
 
   async playRound() {
-    async function displaySoulutionSequence(seq) {
-      for (let i = 0; i < currRound; i++) {
-        switch (seq[i]) {
-          case "R":
-            red.classList.add("lightred");
-            new Audio("sounds/red.wav").play();
-            await new Promise((resolve) =>
-              setTimeout(() => {
-                resolve();
-              }, 120)
-            );
-            red.classList.remove("lightred");
-            break;
-          case "B":
-            blue.classList.add("lightblue");
-            new Audio("sounds/blue.wav").play();
-            await new Promise((resolve) =>
-              setTimeout(() => {
-                resolve();
-              }, 120)
-            );
-            blue.classList.remove("lightblue");
-            break;
-          case "Y":
-            yellow.classList.add("lightyellow");
-            new Audio("sounds/yellow.wav").play();
-            await new Promise((resolve) =>
-              setTimeout(() => {
-                resolve();
-              }, 120)
-            );
-            yellow.classList.remove("lightyellow");
-            break;
-          case "G":
-            green.classList.add("lightgreen");
-            new Audio("sounds/green.wav").play();
-            await new Promise((resolve) =>
-              setTimeout(() => {
-                resolve();
-              }, 120)
-            );
-            green.classList.remove("lightgreen");
-            break;
-        }
+    //display soulution sequence first
+    this.displaySoulutionSequence(this.solution);
+  }
+  async displaySoulutionSequence(seq) {
+    for (let i = 0; i < this.currRound; i++) {
+      switch (seq[i]) {
+        case "R":
+          red.classList.add("lightred");
+          new Audio("sounds/red.wav").play();
+          await new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, 120)
+          );
+          red.classList.remove("lightred");
+          break;
+        case "B":
+          blue.classList.add("lightblue");
+          new Audio("sounds/blue.wav").play();
+          await new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, 120)
+          );
+          blue.classList.remove("lightblue");
+          break;
+        case "Y":
+          yellow.classList.add("lightyellow");
+          new Audio("sounds/yellow.wav").play();
+          await new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, 120)
+          );
+          yellow.classList.remove("lightyellow");
+          break;
+        case "G":
+          green.classList.add("lightgreen");
+          new Audio("sounds/green.wav").play();
+          await new Promise((resolve) =>
+            setTimeout(() => {
+              resolve();
+            }, 120)
+          );
+          green.classList.remove("lightgreen");
+          break;
       }
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve();
+        }, 400)
+      );
     }
   }
 
@@ -184,7 +191,13 @@ function getSolution(rounds) {
 }
 
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
-play.addEventListener("click", function () {
+play.addEventListener("click", async function () {
   game = new Simone(roundsText.value, getSolution(roundsText.value)); //game should default to 10 if no number is entered
   game.displayStart(getStart().sequence);
+  await new Promise((resolve) =>
+    setTimeout(() => {
+      resolve();
+    }, 4000)
+  );
+  game.playRound();
 });
