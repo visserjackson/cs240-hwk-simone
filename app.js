@@ -154,6 +154,20 @@ class Simone {
       document.body.style.backgroundColor = "hotpink";
       //display "you lose" status
       this.displayStatus("Incorrect! You lose!");
+    } else {
+      //they are correct. figure out the scenario
+      //1. game ends if last button in last round
+      if (
+        this.currRound == this.roundsTotal &&
+        this.inputs.length == this.solution.length
+      ) {
+        //play sound
+        new Audio("sounds/win.mp3").play();
+        //change background to DeepSkyBlue
+        document.body.style.backgroundColor = "deepSkyBlue";
+        //display "you win" status
+        this.displayStatus("Yay you win!");
+      }
     }
   }
 
