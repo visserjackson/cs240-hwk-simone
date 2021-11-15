@@ -188,6 +188,8 @@ class Simone {
             resolve();
           }, 800)
         );
+        //display solution sequence for next round
+        this.displaySoulution(this.solution);
       } else {
         //3. Wait for next button in sequence if still going
         this.displayStatus(
