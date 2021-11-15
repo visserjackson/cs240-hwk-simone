@@ -168,6 +168,25 @@ class Simone {
         //display "you win" status
         this.displayStatus("Yay you win!");
       }
+      //2. go to next round if last button of current round
+      else if (this.inputs.length == this.currRound) {
+        //update status
+        this.displayStatus("Good job! Prepare for next round.");
+        //update round
+        this.currRound++;
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            resolve();
+          }, 800)
+        );
+        //update status again
+        this.displayStatus(`Round ${this.currRound} of ${this.roundsTotal}.`);
+        await new Promise((resolve) =>
+          setTimeout(() => {
+            resolve();
+          }, 800)
+        );
+      }
     }
   }
 
