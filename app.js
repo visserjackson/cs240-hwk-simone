@@ -174,6 +174,8 @@ class Simone {
         this.displayStatus("Good job! Prepare for next round.");
         //update round
         this.currRound++;
+        //clear inputs
+        this.inputs.splice(0, this.inputs.length);
         await new Promise((resolve) =>
           setTimeout(() => {
             resolve();
@@ -185,6 +187,11 @@ class Simone {
           setTimeout(() => {
             resolve();
           }, 800)
+        );
+      } else {
+        //3. Wait for next button in sequence if still going
+        this.displayStatus(
+          `So far so good! ${this.currRound - this.inputs.length} more to go!`
         );
       }
     }
