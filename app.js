@@ -340,6 +340,27 @@ green.addEventListener("mouseleave", function () {
   green.classList.remove("lightgreen");
 });
 
+//play sound when mouse is lifted and remove light color
+red.addEventListener("mouseup", function () {
+  red.classList.remove("lightred");
+  new Audio("sounds/red.wav").play();
+});
+
+blue.addEventListener("mouseup", function () {
+  blue.classList.remove("lightblue");
+  new Audio("sounds/blue.wav").play();
+});
+
+yellow.addEventListener("mouseup", function () {
+  yellow.classList.remove("lightyellow");
+  new Audio("sounds/yellow.wav").play();
+});
+
+green.addEventListener("mouseup", function () {
+  green.classList.remove("lightgreen");
+  new Audio("sounds/green.wav").play();
+});
+
 //add event listeners needed for all buttons
 for (let b of btns) {
   //light up on hover
