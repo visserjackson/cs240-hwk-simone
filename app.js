@@ -9,6 +9,7 @@ const red = document.getElementById("redSq");
 const blue = document.getElementById("blueSq");
 const yellow = document.getElementById("yellowSq");
 const green = document.getElementById("greenSq");
+const btns = document.querySelectorAll(".colors");
 const play = document.getElementById("play");
 const roundsText = document.getElementById("rounds");
 const status = document.getElementById("status");
@@ -304,3 +305,13 @@ green.addEventListener("click", function () {
   //function for all buttons
   game.updateGame();
 });
+
+//buttons should all light up on hover
+for (let b of btns) {
+  b.addEventListener("mouseenter", function () {
+    b.classList.toggle("hover");
+  });
+  b.addEventListener("mouseleave", function () {
+    b.classList.toggle("hover");
+  });
+}
