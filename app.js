@@ -306,8 +306,43 @@ green.addEventListener("click", function () {
   game.updateGame();
 });
 
-//buttons should all light up on hover
+//buttons light up on click down
+red.addEventListener("mousedown", function () {
+  red.classList.toggle("lightred");
+});
+
+blue.addEventListener("mousedown", function () {
+  blue.classList.toggle("lightblue");
+});
+
+yellow.addEventListener("mousedown", function () {
+  yellow.classList.toggle("lightyellow");
+});
+
+green.addEventListener("mousedown", function () {
+  green.classList.toggle("lightgreen");
+});
+
+//buttons are no longer lit when mouse moved away
+red.addEventListener("mouseleave", function () {
+  red.classList.remove("lightred");
+});
+
+blue.addEventListener("mouseleave", function () {
+  blue.classList.remove("lightblue");
+});
+
+yellow.addEventListener("mouseleave", function () {
+  yellow.classList.remove("lightyellow");
+});
+
+green.addEventListener("mouseleave", function () {
+  green.classList.remove("lightgreen");
+});
+
+//add event listeners needed for all buttons
 for (let b of btns) {
+  //light up on hover
   b.addEventListener("mouseenter", function () {
     b.classList.toggle("hover");
   });
