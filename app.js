@@ -23,6 +23,7 @@ class Simone {
   currRound = 1;
   roundsTotal;
   solution;
+  inputs = [];
   constructor(rounds, solution) {
     this.roundsTotal = rounds;
     this.solution = solution;
@@ -82,7 +83,23 @@ class Simone {
   async playRound() {
     //display soulution sequence first
     this.displaySoulutionSequence(this.solution);
+    //set up event listeners?
+    red.addEventListener("mousedown", function () {
+      this.inputs.push("R");
+    });
+    blue.addEventListener("mousedown", function () {
+      this.inputs.push("B");
+    });
+    yellow.addEventListener("mousedown", function () {
+      this.inputs.push("Y");
+    });
+    green.addEventListener("mousedown", function () {
+      this.inputs.push("G");
+    });
   }
+
+  async compareInputs() {}
+
   async displaySoulutionSequence(seq) {
     for (let i = 0; i < this.currRound; i++) {
       switch (seq[i]) {
