@@ -132,6 +132,31 @@ class Simone {
     }
   }
 
+  async displayStatus(msg) {
+    status.innerHTML = msg;
+  }
+
+  async updateGame() {
+    //should be called everytime a button is clicked. buttons add inputs
+    //first, find out if user input is right or wrong
+    let correct = true;
+    for (let i = 0; i < this.inputs.length; i++) {
+      if (this.inputs[i] != this.solution[i]) {
+        correct = false;
+      }
+    }
+    //if they're wrong, game is over
+    if (!correct) {
+      //play sounds
+      new Audio("sounds/wrong.wav").play();
+      new Audio("sounds/lose.wav").play();
+      //change background to hot pink
+      document.body.style.backgroundColor = "hotpink";
+      //display "you lose" status
+      this.displayStatus("Incorrect! You lose!");
+    }
+  }
+
   //getters
   hasWon() {
     return this.won;
@@ -142,6 +167,11 @@ class Simone {
 
   getSolution() {
     return this.solution;
+  }
+
+  //setters
+  addInput(input) {
+    this.inputs.push(input);
   }
 }
 
@@ -205,4 +235,30 @@ play.addEventListener("click", async function () {
     }, 4000)
   );
   game.displaySoulution(game.getSolution());
+});
+
+//game should only be triggered when user clicks. add event listeners to the four buttons that check
+//for all game states and react appropriately
+red.addEventListener("click", function () {
+  game.addInput("R"); //specific action for red
+  //function for all buttons
+  game.updateGame();
+});
+
+blue.addEventListener("click", function () {
+  game.addInput("B"); //specific action for blue
+  //function for all buttons
+  game.updateGame();
+});
+
+yellow.addEventListener("click", function () {
+  game.addInput("Y"); //specific action for yellow
+  //function for all buttons
+  game.updateGame();
+});
+
+green.addEventListener("click", function () {
+  game.addInput("G"); //specific action for green
+  //function for all buttons
+  game.updateGame();
 });
