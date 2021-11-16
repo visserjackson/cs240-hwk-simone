@@ -225,10 +225,10 @@ class Simone {
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", async function () {
   if (roundsText.value == "") {
-    let sol = getSolutionAPI(10);
+    let sol = await getSolutionAPI(10);
     game = new Simone(10, sol);
   } else {
-    let sol = getSolutionAPI(roundsText.value);
+    let sol = await getSolutionAPI(roundsText.value);
     game = new Simone(roundsText.value, sol);
   }
   let start = await getStartAPI();
