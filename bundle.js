@@ -284,12 +284,16 @@ function getSolution(rounds) {
 }
 
 //use api to get solution
-// async function getSolutionAPI(rounds) {
-//   try {
-//     let response = await axios.get(`http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=getSolution&rounds=${rounds}`);
-//     return response.data.key;
-//   } catch )
-// }
+async function getSolutionAPI(rounds) {
+  try {
+    let response = await axios.get(
+      `http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=getSolution&rounds=${rounds}`
+    );
+    return response.data.key;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", async function () {
@@ -306,7 +310,8 @@ play.addEventListener("click", async function () {
     }, 4000)
   );
   game.displayStatus(`Round 1 of ${game.getTotalRounds()}`);
-  game.displaySoulution(game.getSolution());
+  let sol = await getSolutionAPI(game.getTotalRounds());
+  game.displaySoulution(sol);
 });
 
 //game should only be triggered when user clicks. add event listeners to the four buttons that check
