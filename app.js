@@ -1,6 +1,7 @@
 /*
 @author Jackson Visser
  */
+const axios = require("axios").default;
 
 const START_LEGNTH = 12;
 
@@ -246,6 +247,18 @@ function getStart() {
   return startObj;
 }
 
+//use api to generate start sequence
+async function getStartAPI() {
+  try {
+    let response = await axios.get(
+      "http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start"
+    );
+    return response.data.sequence;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 //also generate solution offline for now
 function getSolution(rounds) {
   let solutionObj = { type: "solution", key: [] };
@@ -269,6 +282,14 @@ function getSolution(rounds) {
   return solutionObj.key;
 }
 
+//use api to get solution
+// async function getSolutionAPI(rounds) {
+//   try {
+//     let response = await axios.get(`http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=getSolution&rounds=${rounds}`);
+//     return response.data.key;
+//   } catch )
+// }
+
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", async function () {
   if (roundsText.value == "") {
@@ -276,7 +297,8 @@ play.addEventListener("click", async function () {
   } else {
     game = new Simone(roundsText.value, getSolution(roundsText.value));
   }
-  game.displayStart(getStart().sequence);
+  let startSeq = await getStartAPI();
+  game.displayStart(startSeq);
   await new Promise((resolve) =>
     setTimeout(() => {
       resolve();
