@@ -225,9 +225,11 @@ class Simone {
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", async function () {
   if (roundsText.value == "") {
-    game = new Simone(10, getSolution(10));
+    let sol = getSolutionAPI(10);
+    game = new Simone(10, sol);
   } else {
-    game = new Simone(roundsText.value, getSolution(roundsText.value));
+    let sol = getSolutionAPI(roundsText.value);
+    game = new Simone(roundsText.value, sol);
   }
   let start = await getStartAPI();
   game.displayStart(start);
@@ -384,6 +386,17 @@ async function getStartAPI() {
       "http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start"
     );
     return response.data.sequence;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getSolutionAPI(rounds) {
+  try {
+    let response = await axios.get(
+      `http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=getSolution&rounds=${rounds}`
+    );
+    return response.data.key;
   } catch (error) {
     console.error(error);
   }
