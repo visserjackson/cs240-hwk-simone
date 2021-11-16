@@ -217,12 +217,6 @@ class Simone {
   }
 
   //getters
-  hasWon() {
-    return this.won;
-  }
-  hasLost() {
-    return this.lost;
-  }
 
   getSolution() {
     return this.solution;
