@@ -298,9 +298,11 @@ async function getSolutionAPI(rounds) {
 //clicking on the "Play Simone" button should instantiate a new Simone game with the correct number of rounds
 play.addEventListener("click", async function () {
   if (roundsText.value == "") {
-    game = new Simone(10, getSolution(10));
+    let sol = await getSolutionAPI(10);
+    game = new Simone(10, sol);
   } else {
-    game = new Simone(roundsText.value, getSolution(roundsText.value));
+    let sol = await getSolutionAPI(roundsText.value);
+    game = new Simone(roundsText.value, sol);
   }
   let startSeq = await getStartAPI();
   game.displayStart(startSeq);
@@ -310,8 +312,7 @@ play.addEventListener("click", async function () {
     }, 4000)
   );
   game.displayStatus(`Round 1 of ${game.getTotalRounds()}`);
-  let sol = await getSolutionAPI(game.getTotalRounds());
-  game.displaySoulution(sol);
+  game.displaySoulution(game.getSolution());
 });
 
 //game should only be triggered when user clicks. add event listeners to the four buttons that check
