@@ -250,8 +250,14 @@ play.addEventListener("click", async function () {
     game = new Simone(10, sol);
   } else {
     //otherwise, use the value from user
-    let sol = await getSolutionAPI(roundsText.value);
-    game = new Simone(roundsText.value, sol);
+    if (roundsText.value <= 0) {
+      //guard against values less than 1
+      alert("You have to play at least one round..");
+      return;
+    } else {
+      let sol = await getSolutionAPI(Math.floor(roundsText.value));
+      game = new Simone(Math.floor(roundsText.value), sol);
+    }
   }
 
   //get start sequence  and display
