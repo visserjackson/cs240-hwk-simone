@@ -1,6 +1,7 @@
 /*
 @author Jackson Visser
  */
+const axios = require("axios").default;
 
 //grab nodes up top
 const red = document.getElementById("redSq");
@@ -228,7 +229,8 @@ play.addEventListener("click", async function () {
   } else {
     game = new Simone(roundsText.value, getSolution(roundsText.value));
   }
-  game.displayStart(getStart().sequence);
+  let start = await getStartAPI();
+  game.displayStart(start);
   await new Promise((resolve) =>
     setTimeout(() => {
       resolve();
@@ -374,4 +376,15 @@ function getSolution(rounds) {
     }
   }
   return solutionObj.key;
+}
+
+async function getStartAPI() {
+  try {
+    let response = await axios.get(
+      "http://cs.pugetsound.edu/~dchiu/cs240/api/simone/?cmd=start"
+    );
+    return response.data.sequence;
+  } catch (error) {
+    console.error(error);
+  }
 }
