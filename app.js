@@ -22,6 +22,11 @@ class Simone {
   roundsTotal;
   solution;
   inputs = []; //an array to keep track of user inputs
+  /*
+  constructor for new game of simone
+  @param rounds The number of rounds to play (default = 10)
+  @param solution A valid solution array
+  */
   constructor(rounds = 10, solution) {
     this.roundsTotal = rounds;
     this.solution = solution;
